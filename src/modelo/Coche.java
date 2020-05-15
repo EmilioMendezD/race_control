@@ -70,7 +70,7 @@ public class Coche implements Serializable {
 	
     @Override
     public String toString() {
-        return "Coche{" + "id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", garaje=" + garaje + '}' + "\n";
+        return "Coche{" + "id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", garaje=" + garaje + '}';
     }
 
 }

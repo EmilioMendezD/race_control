@@ -44,19 +44,19 @@ public class CarreraControl implements Serializable {
 
 	// Metodos Getter y Setter
 
-	int getId() {
+	public int getId() {
 		return id;
 	}
 
-	void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	HashMap<Integer, Carrera> getCarrerasHM() {
+	public HashMap<Integer, Carrera> getCarrerasHM() {
 		return carreras;
 	}
 
-	void setCarrerasHM(HashMap<Integer, Carrera> carreras) {
+	public void setCarrerasHM(HashMap<Integer, Carrera> carreras) {
 		this.carreras = carreras;
 	}
 

@@ -18,7 +18,8 @@ public class Garaje implements Serializable {
 
 	// Constructor Parametrizado
 	public Garaje(int id, String escuderia) {
-		// TODO Auto-generated constructor stub
+		this.id = id;
+		this.escuderia = escuderia;
 	}
 
 	// Metodos Getter y Setter
@@ -45,7 +46,7 @@ public class Garaje implements Serializable {
 	
     @Override
     public String toString() {
-        return "Garaje{" + "id=" + id + ", escuderia=" + escuderia + ", coches=" + coches + '}' + "\n";
+        return "Garaje{" + "id=" + id + ", escuderia=" + escuderia + ", coches=" + coches + '}';
     }
 
 }

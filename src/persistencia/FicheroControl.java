@@ -1,4 +1,4 @@
-package controlador;
+package persistencia;
 
 import modelo.Carrera;
 import modelo.Coche;
@@ -12,6 +12,10 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import controlador.CarreraControl;
+import controlador.CocheControl;
+import controlador.GarajeControl;
 
 public class FicheroControl {
 
