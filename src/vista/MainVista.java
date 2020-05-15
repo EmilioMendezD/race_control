@@ -26,13 +26,14 @@ public class MainVista {
 			+ ">crear carrera <nombre> <tipo>,  Ej1. >crear carrera standard, Ej2. >crear carrera eliminacion" + "\n"
 			+ ">crear carrera <nombre> <tipo> <garaje_id>,  Ej. >crear carrera eliminacion McLaren" + "\n"
 			+ ">listar coches,  Lista todos los coches almacenados" + "\n"
-			+ ">listar coches <garaje_id>,  Ej. >listar coches McLaren,  Lista todos los coches almacenados en un garaje"
-			+ "\n" + ">listar garajes,  lista todos los garajes almacenados";
+			+ ">listar coches <garaje_id>,  Ej. >listar coches McLaren,  Lista todos los coches almacenados en un garaje" + "\n" 
+			+ ">listar garajes,  lista todos los garajes almacenados" + "\n"
+			+ ">listar carreras,  Lista todas las carreras " + "\n"
+			+ ">simular carrera <id_carrera>" + "\n"
+			;
 
 	private static final String advertencia = " Introduce un comando valido, para mas informacion usar el comando> ayuda";
-
 	private static String input;
-
 	public static final String path = "data.dat";
 
 	public static void main(String[] args) {
@@ -50,21 +51,25 @@ public class MainVista {
 		while (true) {
 			System.out.print("race-control>");
 			input = scanner.nextLine();
+			input = input.toLowerCase();
 			String[] myargs = input.split(" ");
 			try {
 				switch (myargs[0]) {
 				case "crear":
+					if (myargs.length == 1) {
+						System.out.println(advertencia);
+					} else {
 					switch (myargs[1]) {
 					case "coche":
 						if (myargs.length == 4) {
 							CocheControl.getInstance().insertarCoche(myargs[2], myargs[3]);
-							System.out.println("Coche: " + myargs[2] + ", " + myargs[3] + " creado.");
+							System.out.println("Coche " + myargs[2] + ", " + myargs[3] + " creado correctamente.");
 						} else
 							System.out.println(advertencia);
 						break;
 					case "garaje":
 						GarajeControl.getInstance().insertarGaraje(myargs[2]);
-						System.out.println("Garaje: " + myargs[2] + " creado");
+						System.out.println("Garaje " + myargs[2] + " creado correctamente");
 						break;
 					case "carrera":
 						TipoCarrera tipo;
@@ -75,18 +80,23 @@ public class MainVista {
 						Carrera carrera = CarreraControl.getInstance().insertarCarrera(myargs[2], tipo);
 						System.out.println("La carrera " + myargs[2] + ", modalidad " + tipo + " ha sido creada: ");
 						if (myargs.length == 5) {
-							Garaje garaje = GarajeControl.getInstance().getGarajesHM().get(myargs[3]);
+							Garaje garaje = GarajeControl.getInstance().getGarajesHM().get(Integer.parseInt(myargs[4]));
 							carrera.setGaraje(garaje);
 							System.out.println("Paticipara solo el garaje " + myargs[4]);
 						} else
 							System.out.println("Paticiparan todos los garajes ");
 						break;
+					// case "torneo": break;
 					default:
 						System.out.println(advertencia);
 						break;
 					}
 					break;
+					}
 				case "agregar":
+					if (myargs.length == 1) {
+						System.out.println(advertencia);
+					} else {
 					switch (myargs[1]) {
 					case "coche":
 						Coche coche = CocheControl.getInstance().getCochesHM().get(Integer.parseInt(myargs[2]));
@@ -99,7 +109,12 @@ public class MainVista {
 						System.out.println(advertencia);
 						break;
 					}
+					break;
+					}
 				case "listar":
+					if (myargs.length == 1) {
+						System.out.println(advertencia);
+					} else {
 					switch (myargs[1]) {
 					case "coches":
 						if (myargs.length == 3) {
@@ -130,25 +145,35 @@ public class MainVista {
 
 					}
 					break;
+					}
 				case "simular":
+					if (myargs.length == 1) {
+						System.out.println(advertencia);
+					} else {
 					switch (myargs[1]) {
 					case "carrera":
 						Carrera carrera = CarreraControl.getInstance().getCarrerasHM().get(Integer.parseInt(myargs[2]));
-						System.out.println("La Carrera " + carrera.getPremio() + " iniciara en...");
+						System.out.println("La Carrera " + carrera.getPremio() + " modalidad " + carrera.getTipo() + " iniciara en...");
 						System.out.println(". 3 .");
 						System.out.println(". 2 .");
 						System.out.println(". 1 .");
-
+						carrera.registrarCompetidores();
+						System.out.println(carrera);
+						System.out.println("Resultado: ");
 						List<Coche> ganadores = carrera.simular();
 						for (Coche coche : ganadores) {
 							System.out.println(coche);
 						}
+						System.out.println("Duracion: ");
+						System.out.println(carrera.getDuracion());
+						break;	
 						// case "torneo": break;
 					default:
 						System.out.println(advertencia);
 						break;
 					}
 					break;
+					}
 				case "guardar":
 					boolean bl;
 					if (myargs.length == 2) {
@@ -174,8 +199,8 @@ public class MainVista {
 				case "ayuda":
 					System.out.println(ayuda);
 					break;
-				case "Salir":
-					System.exit(1);
+				case "salir":
+					System.exit(0);
 					break;
 				}
 			} catch (Exception e) {

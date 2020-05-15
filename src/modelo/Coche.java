@@ -10,7 +10,6 @@ public class Coche implements Serializable {
 	private static int velocidadMaxima = 180;
 	private String marca;
 	private String modelo;
-	private Garaje garaje;
 
 	// Constructor Vacio
 
@@ -60,17 +59,13 @@ public class Coche implements Serializable {
 		this.modelo = modelo;
 	}
 
-	public Garaje getGaraje() {
-		return garaje;
-	}
-
 	public void setGaraje(Garaje garaje) {
 		garaje = garaje;
 	}
 	
     @Override
     public String toString() {
-        return "Coche{" + "id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", garaje=" + garaje + '}';
+        return "Coche{" + "id=" + id + ", marca=" + marca + ", modelo=" + modelo + '}';
     }
 
 }
