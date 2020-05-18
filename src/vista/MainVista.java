@@ -48,6 +48,8 @@ public class MainVista {
 
 		Scanner scanner = new Scanner(System.in);
 
+		//Recomendacion Switch siempre con enum 
+		
 		while (true) {
 			System.out.print("race-control>");
 			input = scanner.nextLine();
